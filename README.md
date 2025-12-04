@@ -1,10 +1,10 @@
 # [Index.html](`file:///C:/Projects/ALEX/p5/index.html`)
 ### 📁_Project 1 || Bookcase 
-[Github](https://github.com/arlingtonam/p5-bookshelf) and [C:/](file:///C:/Projects/ALEX/p5/_Project%201/index.html)
+[Github](https://github.com/arlingtonam/p5-bookshelf) 
 ### 📁_Project 2 || Starborder
-[Github](https://github.com/arlingtonam/p5-starborder) and [C:/](file:///C:/Projects/ALEX/p5/_Project%202/index.html)
+[Github](https://github.com/arlingtonam/p5-starborder) 
 ### 📁_Project 3 || Deck of cards
-[Github](https://github.com/arlingtonam/p5-deckofcards) and [C:/](file:///C:/Projects/ALEX/p5/_Project%203/index.html)
+[Github](https://github.com/arlingtonam/p5-deckofcards) 
 
 # Root folder
 ```
