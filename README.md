@@ -1,10 +1,10 @@
 # [Index.html](`file:///C:/Projects/ALEX/p5/index.html`)
 ### 📁_Project 1 || Bookcase 
-[Github](https://github.com/arlingtonam/p5-bookshelf) and [C:/](`file:///C:/Projects/ALEX/p5/_Project%201/index.html`)
+[Github](https://github.com/arlingtonam/p5-bookshelf) and [C:/](file:///C:/Projects/ALEX/p5/_Project%201/index.html)
 ### 📁_Project 2 || Starborder
-[Github](https://github.com/arlingtonam/p5-starborder) and [C:/](`file:///C:/Projects/ALEX/p5/_Project%202/index.html`)
+[Github](https://github.com/arlingtonam/p5-starborder) and [C:/](file:///C:/Projects/ALEX/p5/_Project%202/index.html)
 ### 📁_Project 3 || Deck of cards
-[Github](https://github.com/arlingtonam/p5-deckofcards) and [C:/](`file:///C:/Projects/ALEX/p5/_Project%203/index.html`)
+[Github](https://github.com/arlingtonam/p5-deckofcards) and [C:/](file:///C:/Projects/ALEX/p5/_Project%203/index.html)
 
 # Root folder
 ```
@@ -16,9 +16,9 @@
 │   ├── index.html
 │   ├── script.js
 │   ├── sketch.js
-│   ├── style.css
+│   └── style.css
 ├── addons folder
-│   └── p5.sound.js
+│   ├── p5.sound.js
 │   └── p5.sound.min.js
 ├── index.html
 ├── p5.js
