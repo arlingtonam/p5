@@ -1,0 +1,21 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 247);
+  }
+
+  canvas {
+    width: 90% !important;
+    height: 90% !important;
+    display: block;
+  }
+
+  /* #text-container {
+    position: absolute;
+  } */
+  .book-text {
+    position: absolute;
+    font-size: 10px;
+    transform: rotate(-90deg);
+
+  }
