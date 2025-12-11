@@ -1,0 +1,16 @@
+/* html, body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(255, 255, 247);
+  }
+
+  canvas {
+    outline: 2px solid black;
+    width: 90% !important;
+    height: 90% !important;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
