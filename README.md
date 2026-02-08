@@ -1,12 +1,3 @@
-# [Index.html](`file:///C:/Projects/ALEX/p5/index.html`)
-### 📁_Project 1 || Bookcase 
-[Github](https://github.com/arlingtonam/p5-bookshelf) 
-### 📁_Project 2 || Starborder
-[Github](https://github.com/arlingtonam/p5-starborder) 
-### 📁_Project 3 || Deck of cards
-[Github](https://github.com/arlingtonam/p5-deckofcards) 
-### 📁_Project 4 || Pixel draw
-[Github](https://github.com/arlingtonam/p5-pixel-draw) 
 
 # Root folder
 ```

@@ -1,12 +1,10 @@
-// const density = 'Ñ@#W$9876543210?!abc;:+=-,._  ';
-const density = '⏺  ';
-// ಄෴⏹∎∴∵∶∷⏺●•╳▣▩▁▂▃▄▅▆▇█▉▶▷☰⚊⛬⁚⁞
-// const density = '█▓▒░ ';
+// const density = 'Ñ@#W$9876543210?!abc;:+=-,._ ';
+const density = '█▓▒░ ';
 
 let strokes = [];
 let currentStroke = null;
 let cow;
-let gridSize;c
+let gridSize;
 // inputs
 let widthElement  = document.getElementById('canvas-width');
 let heightElement  = document.getElementById('canvas-height');
