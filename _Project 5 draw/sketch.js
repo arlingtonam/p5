@@ -106,28 +106,35 @@ function windowResized() {
 
 function exportAsText() {
   let output = '';
-  
-  // Convert grid to text (row by row)
+
+  // Build HTML with fixed-width cells so every character aligns
+  output += '<!DOCTYPE html><html><head><style>';
+  output += 'body { margin: 0; padding: 20px; background: #000; }';
+  output += '.row { display: flex; }';
+  output += '.cell { width: 1em; height: 1em; text-align: center; font-family: monospace; font-size: 14px; line-height: 1em; color: #fff; }';
+  output += '</style></head><body>';
+
   for (let j = 0; j < rows; j++) {
-    let line = '';
+    output += '<div class="row">';
     for (let i = 0; i < cols; i++) {
-      line += grid[i][j];
+      let ch = grid[i][j];
+      if (ch === ' ') ch = '&nbsp;';
+      output += '<div class="cell">' + ch + '</div>';
     }
-    output += line + '\n';
+    output += '</div>';
   }
-  
-  // Create a downloadable text file
-  let blob = new Blob([output], { type: 'text/plain' });
+
+  output += '</body></html>';
+
+  let blob = new Blob([output], { type: 'text/html' });
   let url = URL.createObjectURL(blob);
   let a = document.createElement('a');
   a.href = url;
-  a.download = 'ascii-art.txt';
+  a.download = 'ascii-art.html';
   a.click();
   URL.revokeObjectURL(url);
-  
-  // Also log to console
-  console.log('ASCII Art exported:');
-  console.log(output);
+
+  console.log('ASCII Art exported as HTML');
 }
 
 // Keyboard shortcuts
