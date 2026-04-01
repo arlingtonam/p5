@@ -1,22 +1,31 @@
 let grid = [];
-let gridSize = 50; // Size of each cell
+let gridSize ; // Size of each cell
 let cols, rows;
 let charToDraw = '⏺'; // Character to draw
 let isTouch = false;
 
 function setup() {
+
+  let slider = document.getElementById('grid-size');
+  gridSize = slider.value;
+
+  slider.addEventListener('input', function() {
+    gridSize = this.value;
+    updateGridSize();
+  });
+
   createCanvas(windowWidth, windowHeight);
+
   cols = floor(width / gridSize);
   rows = floor(height / gridSize);
-  
-  // Initialize grid with empty spaces
+
   for (let i = 0; i < cols; i++) {
     grid[i] = [];
     for (let j = 0; j < rows; j++) {
       grid[i][j] = ' ';
     }
   }
-  
+
   background(220, 254, 82);
   textFont('monospace');
   textAlign(CENTER, CENTER);
@@ -27,7 +36,6 @@ function setup() {
 function draw() {
   background(220, 254, 82);
   
-  // Draw grid (optional - remove these lines if you don't want grid lines)
   stroke(200);
   strokeWeight(1);
   for (let i = 0; i <= cols; i++) {
@@ -37,7 +45,6 @@ function draw() {
     line(0, j * gridSize, width, j * gridSize);
   }
   
-  // Draw characters
   noStroke();
   fill(0);
   textAlign(CENTER, CENTER);
@@ -55,7 +62,6 @@ function drawAtPosition(x, y) {
   let col = floor(x / gridSize);
   let row = floor(y / gridSize);
   
-  // Check bounds
   if (col >= 0 && col < cols && row >= 0 && row < rows) {
     grid[col][row] = charToDraw;
   }
@@ -65,52 +71,43 @@ function mousePressed() {
   if (isTouch) return;
   drawAtPosition(mouseX, mouseY);
 }
-
 function mouseDragged() {
   if (isTouch) return;
   drawAtPosition(mouseX, mouseY);
 }
-
 function touchStarted() {
   isTouch = true;
   drawAtPosition(mouseX, mouseY);
   return false;
 }
-
 function touchMoved() {
   drawAtPosition(mouseX, mouseY);
   return false;
 }
-
 function touchEnded() {
   isTouch = false;
   return false;
 }
-
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   cols = floor(width / gridSize);
   rows = floor(height / gridSize);
   
-  // Reinitialize grid
   let oldGrid = grid;
   grid = [];
   for (let i = 0; i < cols; i++) {
     grid[i] = [];
     for (let j = 0; j < rows; j++) {
-      // Preserve old values if they exist
       grid[i][j] = (oldGrid[i] && oldGrid[i][j]) ? oldGrid[i][j] : ' ';
     }
   }
 }
 
-function exportAsText() {
+function exportAsHTML() {
   let output = '';
-
-  // Build HTML with fixed-width cells so every character aligns
   output += '<!DOCTYPE html><html><head><style>';
   output += 'body { margin: 0; padding: 20px; background: #000; }';
-  output += '.row { display: flex; }';
+  output += '.row { display: flex; }';ko
   output += '.cell { width: 1em; height: 1em; text-align: center; font-family: monospace; font-size: 14px; line-height: 1em; color: #fff; }';
   output += '</style></head><body>';
 
@@ -133,55 +130,71 @@ function exportAsText() {
   a.download = 'ascii-art.html';
   a.click();
   URL.revokeObjectURL(url);
-
   console.log('ASCII Art exported as HTML');
 }
+function exportAsSVG() {
+  const cellSize = parseInt(gridSize);
+  const svgWidth = cols * cellSize;
+  const svgHeight = rows * cellSize;
+  const fontSize = cellSize * 0.8;
 
-// Keyboard shortcuts
-function keyPressed() {
-  // Press 'c' to clear
-  if (key === 'c' || key === 'C') {
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        grid[i][j] = ' ';
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">`;
+  svg += `<rect width="100%" height="100%" fill="#dcfe52"/>`;
+
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (grid[i][j] !== ' ') {
+        const x = i * cellSize + cellSize / 2;
+        const y = j * cellSize + cellSize / 2;
+        svg += `<text x="${x}" y="${y}" font-family="monospace" font-size="${fontSize}" text-anchor="middle" dominant-baseline="central">${grid[i][j]}</text>`;
       }
     }
   }
-  
-  // Press 'e' to export
-  if (key === 'e' || key === 'E') {
-    exportAsText();
+
+  svg += `</svg>`;
+
+  let blob = new Blob([svg], { type: 'image/svg+xml' });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = 'ascii-art.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function exportAsText() {
+  let output = '';
+  for (let j = 0; j < rows; j++) {
+    let line = '';
+    for (let i = 0; i < cols; i++) {
+      line += grid[i][j];
+    }
+    output += line + '\n';
   }
   
-  // Press number keys 1-5 to change grid size
-  if (key === '1') {
-    gridSize = 10;
-    updateGridSize();
+  let blob = new Blob([output], { type: 'text/plain' });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = 'ascii-art.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+  console.log('ASCII Art exported:');
+}
+function clearGrid() {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      grid[i][j] = ' ';
+    }
   }
-  if (key === '2') {
-    gridSize = 20;
-    updateGridSize();
-  }
-  if (key === '3') {
-    gridSize = 30;
-    updateGridSize();
-  }
-  if (key === '4') {
-    gridSize = 40;
-    updateGridSize();
-  }
-  if (key === '5') {
-    gridSize = 50;
-    updateGridSize();
-  }
-  
-  // Type any other character to set it as the drawing character
-  if (key.length === 1 && key !== 'c' && key !== 'C' && key !== 'e' && key !== 'E' && !['1','2','3','4','5'].includes(key)) {
+}
+
+function keyPressed() {
+  if (key.length === 1) {
     charToDraw = key;
   }
 }
 
-function updateGridSize() {
+function updateGridSize() { 
   cols = floor(width / gridSize);
   rows = floor(height / gridSize);
   
@@ -196,3 +209,4 @@ function updateGridSize() {
     }
   }
 }
+
