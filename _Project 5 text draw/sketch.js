@@ -3,21 +3,20 @@ let gridSize ; // Size of each cell
 let cols, rows;
 let charToDraw = '⏺'; // Character to draw
 let isTouch = false;
-
 function setup() {
 
   let slider = document.getElementById('grid-size');
-  gridSize = slider.value;
+  cols = parseInt(slider.value);
+  gridSize = floor(windowWidth / cols);
+  rows = floor(windowHeight / gridSize);
 
   slider.addEventListener('input', function() {
-    gridSize = this.value;
+    cols = parseInt(this.value);
+    document.getElementById('cols-display').textContent = 'column amount: ' + cols;
     updateGridSize();
   });
 
-  createCanvas(windowWidth, windowHeight);
-
-  cols = floor(width / gridSize);
-  rows = floor(height / gridSize);
+  createCanvas(cols * gridSize, rows * gridSize);
 
   for (let i = 0; i < cols; i++) {
     grid[i] = [];
@@ -89,10 +88,10 @@ function touchEnded() {
   return false;
 }
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  cols = floor(width / gridSize);
-  rows = floor(height / gridSize);
-  
+  gridSize = floor(windowWidth / cols);
+  rows = floor(windowHeight / gridSize);
+  resizeCanvas(cols * gridSize, rows * gridSize);
+
   let oldGrid = grid;
   grid = [];
   for (let i = 0; i < cols; i++) {
@@ -194,19 +193,20 @@ function keyPressed() {
   }
 }
 
-function updateGridSize() { 
-  cols = floor(width / gridSize);
-  rows = floor(height / gridSize);
-  
-  // Reinitialize grid
+function updateGridSize() {
+  gridSize = floor(windowWidth / cols);
+  rows = floor(windowHeight / gridSize);
+
   let oldGrid = grid;
   grid = [];
   for (let i = 0; i < cols; i++) {
     grid[i] = [];
     for (let j = 0; j < rows; j++) {
-      // Preserve old values if they exist
       grid[i][j] = (oldGrid[i] && oldGrid[i][j]) ? oldGrid[i][j] : ' ';
     }
   }
+
+  resizeCanvas(cols * gridSize, rows * gridSize);
+  loop();
 }
 
