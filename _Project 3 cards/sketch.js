@@ -120,7 +120,7 @@ function backCardStyle() {
   let graphic = createGraphics(cardWidth, cardHeight);
   graphic.stroke(0); // black stroke
   graphic.strokeWeight(2); // stroke thickness
-  graphic.fill(200, 100, 100);
+  graphic.fill(255,0,255);
   graphic.rect(margin, margin, cardWidth - (margin * 2), cardHeight - (margin * 2), 10);
 
   return graphic;

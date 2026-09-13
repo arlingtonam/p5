@@ -8,7 +8,7 @@ let img;
 
 function preload() {
     img = loadImage("flower.png");
-    cells = 50; // number of characters across and down the output grid
+    cells = 50; // number of characters across the output grid
 }
 
 function setup() {
